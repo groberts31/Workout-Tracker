@@ -23,10 +23,16 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-    workout.findByIdAndUpdate(
+    Workout.findByIdAndUpdate(
         req.params.id,
         { $push: { exercises: req.body } }
     )
+        .then(results => res.json(results))
+        .catch(err => res.json(err))
+});
+
+router.get("/api/workouts/range", (req, res) => {
+    Workout.find()
         .then(results => res.json(results))
         .catch(err => res.json(err))
 });
