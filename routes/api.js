@@ -3,11 +3,20 @@ const Workout = require("../models/workout.js");
 
 router.post("/api/workouts", ({ body }, res) => {
     Workout.create(body)
-      .then(dbWorkout => {
-        res.json(dbWorkout);
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
-  });
-  
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
+
+router.post("/api/workouts/bulk", ({ body }, res) => {
+    Workout.insertMany(body)
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
